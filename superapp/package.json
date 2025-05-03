@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "lint": "eslint .",
     "start": "react-native start",
+    "android": "react-native run-android --no-packager",
+    "ios": "react-native run-ios --no-packager",
+    "lint": "eslint .",
+    "pods": "(cd ios && bundle install && bundle exec pod install)",
+    "pods:update": "(cd ios && bundle exec pod update)",
+    "start:ios": "react-native start --platform ios",
+    "start:android": "react-native start --platform android",
     "test": "jest"
   },
   "dependencies": {
