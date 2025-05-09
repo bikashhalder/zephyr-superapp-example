@@ -14,9 +14,9 @@ const USE_ZEPHYR = Boolean(process.env.ZC);
  * Learn about Re.Pack configuration: https://re-pack.dev/docs/guides/configuration
  */
 
-const config = env => {
+export default env => {
   const {mode, platform = process.env.PLATFORM} = env;
-  return {
+  const config = {
     context: __dirname,
     entry: './index.js',
     experiments: {
@@ -68,6 +68,5 @@ const config = env => {
       }),
     ],
   };
+  return withZephyr()(config);
 };
-
-export default USE_ZEPHYR ? withZephyr()(config) : config;
