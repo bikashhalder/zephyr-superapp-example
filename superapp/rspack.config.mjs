@@ -1,9 +1,11 @@
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {fileURLToPath} from 'node:url';
 import * as Repack from '@callstack/repack';
+import {withZephyr} from 'zephyr-webpack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const USE_ZEPHYR = Boolean(process.env.ZC);
 
 /**
  * Rspack configuration enhanced with Re.Pack defaults for React Native.
@@ -12,8 +14,8 @@ const __dirname = path.dirname(__filename);
  * Learn about Re.Pack configuration: https://re-pack.dev/docs/guides/configuration
  */
 
-export default env => {
-  const { mode, platform = process.env.PLATFORM } = env;
+const config = env => {
+  const {mode, platform = process.env.PLATFORM} = env;
   return {
     context: __dirname,
     entry: './index.js',
@@ -26,7 +28,7 @@ export default env => {
       ...Repack.getResolveOptions(),
     },
     output: {
-      // Unsure - for module federation HMR and runtime? 
+      // Unsure - for module federation HMR and runtime?
       uniqueName: 'super-host-app',
     },
     module: {
@@ -36,7 +38,9 @@ export default env => {
       ],
     },
     plugins: [
-      new Repack.RepackPlugin(),
+      new Repack.RepackPlugin({
+        platform,
+      }),
       new Repack.plugins.ModuleFederationPluginV2({
         name: 'superapp',
         dts: false,
@@ -53,7 +57,7 @@ export default env => {
             singleton: true,
             version: '0.78.2',
             eager: true,
-          }
+          },
         },
       }),
       // Supports for new architecture - Hermes can also use JS, it's not a requirement, it will still work the same but it's for performance optimization
@@ -63,6 +67,7 @@ export default env => {
         exclude: /index.bundle$/,
       }),
     ],
-
   };
 };
+
+export default USE_ZEPHYR ? withZephyr()(config) : config;

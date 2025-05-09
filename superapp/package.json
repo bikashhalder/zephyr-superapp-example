@@ -4,20 +4,25 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "android": "react-native run-android --no-packager",
+    "android": "react-native run-android",
     "ios": "react-native run-ios --no-packager",
     "lint": "eslint .",
     "pods": "(cd ios && bundle install && bundle exec pod install)",
     "pods:update": "(cd ios && bundle exec pod update)",
     "start:ios": "react-native start --platform ios",
     "start:android": "react-native start --platform android",
-    "test": "jest"
+    "test": "jest",
+    "deploy:host": "ZC=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=android --env mode=production",
+    "deploy:mini": "ZC=true STANDALONE=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=android --env mode=production",
+    "deploy:ios:host": "ZC=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=ios --env mode=production",
+    "deploy:ios:mini": "ZC=true STANDALONE=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=ios --env mode=production"
   },
   "dependencies": {
     "@module-federation/enhanced": "^0.13.1",
     "@react-native-async-storage/async-storage": "^2.1.2",
     "react": "19.0.0",
-    "react-native": "0.78.2"
+    "react-native": "0.78.2",
+    "zephyr-webpack-plugin": "^0.0.39"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
