@@ -45,7 +45,8 @@ export default env => {
         name: 'superapp',
         dts: false,
         remotes: {
-          miniapp: `miniapp@http://localhost:9001/${platform}/miniapp.container.js.bundle`,
+          // miniapp: `miniapp@http://localhost:9001/${platform}/miniapp.container.js.bundle`,
+          miniapp: `miniapp@https://t-android-latest-bikash-halder-miniapp-zyphyr-miniapp-6b7a26-ze.zephyrcloud.app/`,
         },
         shared: {
           react: {
