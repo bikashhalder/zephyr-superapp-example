@@ -12,10 +12,9 @@
     "start:ios": "react-native start --platform ios",
     "start:android": "react-native start --platform android",
     "test": "jest",
-    "deploy:host": "ZC=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=android --env mode=production",
-    "deploy:mini": "ZC=true STANDALONE=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=android --env mode=production",
-    "deploy:ios:host": "ZC=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=ios --env mode=production",
-    "deploy:ios:mini": "ZC=true STANDALONE=true ZEPHYR_API_KEY=your-api-key rspack build --env platform=ios --env mode=production"
+    "bundle": "pnpm run bundle:ios && pnpm run bundle:android",
+    "bundle:ios": "react-native bundle --platform ios --dev false --entry-file index.js",
+    "bundle:android": "react-native bundle --platform android --dev false --entry-file index.js"
   },
   "dependencies": {
     "@module-federation/enhanced": "^0.13.1",
